@@ -63,6 +63,12 @@ export function AppProvider({ children }) {
       ...current,
       [module]: current[module].map((item) => (item.id === id ? updated : item)),
     }));
+
+    if (module === "appointments") {
+      const customers = await customerApi.list();
+      setState((current) => ({ ...current, customers }));
+    }
+
     return updated;
   }
 
